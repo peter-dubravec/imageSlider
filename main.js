@@ -14,12 +14,21 @@ function hideImages(ifInitial) {
 function showPicture(key) {
   let picture = document.querySelector(`.middle img[data-key='${key}']`);
   picture.style.opacity = "1";
+  handleTimeOut();
 }
 
 function showSlide(e) {
   let dataKey = e.target.getAttribute("data-key");
   hideImages();
   showPicture(dataKey);
+}
+
+function handleTimeOut() {
+  clearInterval(initialSetting.interval);
+
+  initialSetting.interval = setInterval(function () {
+    moveSlide();
+  }, 5000);
 }
 
 function moveSlide() {
@@ -31,10 +40,10 @@ function moveSlide() {
 
   hideImages();
 
-  if (this.className == "right") {
-    nextPictureKey += 1;
-  } else {
+  if (this.className == "left") {
     nextPictureKey -= 1;
+  } else {
+    nextPictureKey += 1;
   }
 
   if (nextPictureKey > lengthOfImgList) {
@@ -42,7 +51,6 @@ function moveSlide() {
   } else if (nextPictureKey < 1) {
     nextPictureKey = lengthOfImgList;
   }
-
   showPicture(nextPictureKey);
 }
 
@@ -69,8 +77,13 @@ let initialSetting = (() => {
   rightArrow.addEventListener("click", moveSlide);
   leftArrow.addEventListener("click", moveSlide);
 
+  let interval = setInterval(function () {
+    moveSlide();
+  }, 5000);
+
   let imgs = document.querySelectorAll(".navigation img");
   imgs.forEach((img) => {
     img.addEventListener("click", showSlide);
   });
+  return { interval };
 })();
