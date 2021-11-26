@@ -5,28 +5,28 @@
 
 body {
   position: relative;
+  background-color: rgba(0, 0, 0, 0.8);
 }
 
 .container {
   height: 100vh;
-  background-color: rgba(0, 0, 0, 0.8);
 }
 
 .slidingimages {
+  min-height: 800px;
+  margin-top: 80px;
+  margin-bottom: 30px;
   height: 80%;
   display: flex;
   align-items: center;
-  justify-content: space-around;
+  justify-content: space-between;
+  flex-shrink: 0;
 }
 
 i {
   font-size: 60px;
   cursor: pointer;
   color: white;
-}
-
-.middle img {
-  opacity: 0;
 }
 
 .middle {
@@ -36,20 +36,23 @@ i {
   transition: opacity 1s ease-out;
 }
 
-img {
+.middle img {
   position: absolute;
+  opacity: 0;
 }
 
 .navigation {
+  width: 60%;
+  margin: 0 auto;
+  flex-wrap: wrap;
   display: flex;
-  height: 20%;
+  height: auto;
   justify-content: center;
   align-items: center;
   gap: 30px;
 }
 
 .navigation img {
-  position: relative;
   width: 250px;
   cursor: pointer;
   z-index: 1;
